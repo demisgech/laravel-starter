@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Collection;
 
-class JobController extends Controller
+class TagController extends Controller
 {
     public function index(): Collection
     {
-        return Job::all();
+        return Tag::all();
     }
 }

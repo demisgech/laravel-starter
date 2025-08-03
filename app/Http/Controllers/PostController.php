@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Collection;
 
-class JobController extends Controller
+class PostController extends Controller
 {
     public function index(): Collection
     {
-        return Job::all();
+        return Post::all();
     }
 }
