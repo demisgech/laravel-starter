@@ -25,8 +25,11 @@
     </ul>
 </nav>
 <div class="container">
-    <header>
+    <header class="d-flex justify-content-between align-items-center">
         <h1>{{$heading}}</h1>
+        @if(request()->is("jobs"))
+            <x-button href="jobs/create">Create Job</x-button>
+        @endif
     </header>
     {{$slot}}
 </div>

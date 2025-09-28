@@ -12,12 +12,11 @@ class Tag extends Model
 
     public function jobs(): BelongsToMany
     {
-        return $this->belongsToMany(Job::class,relatedPivotKey: "job_listings_id");
+        return $this->belongsToMany(Job::class, relatedPivotKey: "job_listings_id");
     }
-
 
     public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class,relatedPivotKey: "posts_id");
+        return $this->belongsToMany(Post::class, relatedPivotKey: "posts_id");
     }
 }

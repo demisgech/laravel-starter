@@ -13,7 +13,9 @@ class Job extends Model
     use HasFactory;
 
     protected $table = 'job_listings';
-    protected $fillable = ['title', 'salary'];
+//    protected $fillable = ['employer_id','title', 'salary'];
+    protected $guarded = []; // Applying no guard
+//    protected $with = ['employer']; // Eager loading
 
     public static function getById(int $id)
     {
@@ -27,6 +29,6 @@ class Job extends Model
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class,foreignPivotKey: "job_listings_id");
+        return $this->belongsToMany(Tag::class, foreignPivotKey: "job_listings_id");
     }
 }
