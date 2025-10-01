@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as AuthenticatableUser;
 use Illuminate\Notifications\Notifiable;
@@ -19,7 +20,8 @@ class User extends AuthenticatableUser
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name' ,
+        'last_name',
         'email',
         'password',
     ];
@@ -47,7 +49,12 @@ class User extends AuthenticatableUser
         ];
     }
 
-    public function posts(): HasMany {
+    public function posts(): HasMany
+    {
         return $this->hasMany(Post::class);
+    }
+
+    public function employer(): BelongsTo {
+        return $this->belongsTo(Employer::class);
     }
 }

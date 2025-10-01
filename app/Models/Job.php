@@ -15,6 +15,7 @@ class Job extends Model
     protected $table = 'job_listings';
 //    protected $fillable = ['employer_id','title', 'salary'];
     protected $guarded = []; // Applying no guard
+
 //    protected $with = ['employer']; // Eager loading
 
     public static function getById(int $id)
