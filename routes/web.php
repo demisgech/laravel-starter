@@ -8,6 +8,10 @@ use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Jobs\JobTranslate;
+use App\Mail\JobPosted;
+use App\Models\Job;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', fn() => view('index'));
@@ -63,3 +67,19 @@ Route::get("/tags", fn() => (new TagController())->index());
 
 Route::get("/contact", fn() => view('contact'));
 Route::get("/dashboard", [DashboardController::class, "index"]);
+
+//Route::get("/test",function(){
+//    Mail::to("demissewg3@gmail.com")->send(new JobPosted());
+////    return new JobPosted();
+//    return "Done";
+//});
+
+
+Route::get("test",function(){
+//   dispatch(function (){
+//       logger("Hello From Queue");
+//   })->delay(5);
+    $job = Job::first();
+    JobTranslate::dispatch($job);
+   return "Done!";
+});
