@@ -2,7 +2,9 @@
     <x-slot:heading>
         Job
     </x-slot:heading>
-    <p>{{$job->title}} pays ${{$job->salary}} per month.</p>
+    <p>{{$job->title}} pays ${{ $job->salary}} per month.</p>
 
-    <x-button href="/jobs/{{$job->id}}/edit">Edit</x-button>
+    @can("edit",$job)
+        <x-button href="/jobs/{{$job->id}}/edit">Edit</x-button>
+    @endcan
 </x-layout>

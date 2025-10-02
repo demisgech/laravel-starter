@@ -36,15 +36,19 @@
                 @enderror
             </div>
             <div class="mb-3 d-flex justify-content-between">
-                <button form="delete-form" class="btn btn-danger">Delete</button>
+                @can('edit',$job)
+                    <button form="delete-form" class="btn btn-danger">Delete</button>
+                @endcan
                 <a href="/jobs/{{$job->id}}" class="btn btn-secondary">Cancel</a>
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
-        <form class="d-none" action="/jobs/{{ $job->id }}" id="delete-form" method="POST">
-            @csrf
-            @method("DELETE")
-        </form>
+        @can("edit",$job)
+            <form class="d-none" action="/jobs/{{ $job->id }}" id="delete-form" method="POST">
+                @csrf
+                @method("DELETE")
+            </form>
+        @endcan
     </div>
 </x-layout>
 

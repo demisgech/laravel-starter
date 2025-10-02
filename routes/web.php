@@ -24,22 +24,26 @@ Route::view("/", "index");
 
 // Grouping routes
 
-//Route::controller(JobController::class)->group(function () {
-//    Route::get('/jobs', 'index');
-//    Route::get('/jobs/create', 'create');
-//    Route::post('/jobs', 'store');
-//    Route::get('/jobs/{job}', 'show');
-//    Route::get('/jobs/{job}/edit', 'edit');
-//    Route::put('/jobs/{job}', 'update');
-//    Route::delete('/jobs/{job}', 'destroy');
-//});
+Route::controller(JobController::class)->group(function () {
+    Route::get('/jobs', 'index');
+    Route::get('/jobs/create', 'create')->middleware("auth");
+    Route::post('/jobs', 'store')->middleware("auth");
+    Route::get('/jobs/{job}', 'show');
+
+    Route::get('/jobs/{job}/edit', 'edit')
+        ->middleware(['auth','can:edit,job']);
+
+    Route::put('/jobs/{job}', 'update')->middleware("auth");
+    Route::delete('/jobs/{job}', 'destroy')->middleware("auth");
+});
 
 // Route resource
-Route::resource("jobs", JobController::class, [
-//    'only' => ['index'],
-//    or we can use except
-//'except' => ['index']
-]);
+//Route::resource("jobs", JobController::class)
+//    ->middleware("auth");
+//Route::resource("jobs", JobController::class)
+//    ->only(['edit', 'update', 'destroy','store']);
+//Route::resource("jobs", JobController::class)
+//    ->except(['index', 'show','create']);
 
 Route::controller(RegisterUserController::class)->group(function () {
     Route::get("/register", "register");
@@ -47,7 +51,7 @@ Route::controller(RegisterUserController::class)->group(function () {
 });
 
 Route::controller(SessionController::class)->group(function () {
-    Route::get("/login", "create");
+    Route::get("/login", "create")->name("login");
     Route::post("/login", "store");
     Route::post("/logout", "destroy");
 });
